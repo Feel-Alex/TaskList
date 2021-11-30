@@ -1,6 +1,6 @@
 package com.domain
 
-data class ShopItem(
+data class TaskItem(
     val id: Int,
     val name: String,
     val count: Int,
