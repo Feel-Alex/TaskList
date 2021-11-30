@@ -1,6 +1,8 @@
 package com.domain
 
-class AddTaskItemUseCase {
+class AddTaskItemUseCase(private val taskListRepository: TaskListRepository) {
+
     fun addTaskItem (taskItem: TaskItem){
+        taskListRepository.addTaskItem(taskItem)
     }
 }

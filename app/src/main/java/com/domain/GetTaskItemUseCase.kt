@@ -1,7 +1,7 @@
 package com.domain
 
-class GetTaskItemUseCase {
+class GetTaskItemUseCase (private val taskListRepository: TaskListRepository) {
     fun getTaskItem (taskItemId : Int) : TaskItem{
-        TODO()
+       return taskListRepository.getTaskItem(taskItemId)
     }
 }
