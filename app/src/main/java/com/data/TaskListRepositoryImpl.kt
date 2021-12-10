@@ -9,6 +9,13 @@ object TaskListRepositoryImpl : TaskListRepository {
     private var autoincrementId = 0
 
 
+//    init {
+//        for (i in 0 until 10){
+//            addTaskItem(TaskItem("name $i", i, true))
+//        }
+//    }
+
+
     override fun addTaskItem(taskItem: TaskItem) {
         if (taskItem.id == TaskItem.UNDEFINED_ID)
         taskItem.id = autoincrementId ++
