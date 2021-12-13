@@ -17,6 +17,5 @@ class MainActivity : AppCompatActivity() {
         viewModel.taskList.observe(this){
             Log.d("My", it.toString())
         }
-        viewModel.getTaskList()
     }
 }
