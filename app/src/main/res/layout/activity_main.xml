@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.presintation.MainActivity">
 
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_mainSV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+    </ScrollView>
+
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_task_list"
         android:layout_width="0dp"
@@ -14,6 +31,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,10 +48,12 @@
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src=""
+        android:src="@drawable/ic_launcher_background" />
 
-
-        />
+    <include
+        android:id="@+id/layout_main"
+        android:visibility="gone"
+        layout="@layout/item_task_enabled"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

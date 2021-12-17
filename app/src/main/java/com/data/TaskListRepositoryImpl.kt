@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.domain.TaskItem
 import com.domain.TaskListRepository
+import java.util.Comparator
 
 object TaskListRepositoryImpl : TaskListRepository {
 
 
-    lateinit var liveDataTLR : MutableLiveData<List<TaskItem>>
-    private val taskListRepositoryImpl = mutableListOf<TaskItem>()
+    val liveDataTLR = MutableLiveData<List<TaskItem>>()
+    private val taskListRepositoryImpl = sortedSetOf(Comparator<TaskItem> { p0, p1 -> p0.id.compareTo(p1.id)})
+
     private var autoincrementId = 0
 
 
