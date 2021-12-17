@@ -21,29 +21,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.taskList.observe(this){
+        viewModel.taskList.observe(this) {
             Log.d("myne", it.toString())
             loadLinear(it)
         }
     }
 
 
-    fun loadLinear (list: List<TaskItem>){
-        binding.llMainSV.removeAllViews()
+    fun loadLinear(list: List<TaskItem>) {
         for (listItem in list) {
-            val taskItemId = if (listItem.enabled) R.layout.item_task_enabled else R.layout.item_task_disabled
-            val view = LayoutInflater.from(this).inflate(taskItemId, binding.llMainSV, false)
-            val tvName = view.findViewById<TextView>(R.id.tv_name)
-            val tvCount = view.findViewById<TextView>(R.id.tv_count)
-            tvCount.text = listItem.count.toString()
-            tvName.text = listItem.name
-            view.setOnLongClickListener {
-                viewModel.changeEnabledState(listItem)
-                true
-            }
-
-            binding.llMainSV.addView(view)
-
+            val taskItemId =
+                if (listItem.enabled) R.layout.item_task_enabled else R.layout.item_task_disabled
         }
     }
 }
