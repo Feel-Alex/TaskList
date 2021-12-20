@@ -16,16 +16,12 @@ class MainViewModel : ViewModel() {
     val taskList = getTaskItemListUseCase.getItemList()
 
     fun deleteTaskItem (taskItem: TaskItem){
-        deleteTaskItemUseCase.deleteTaskItem(taskItem)
+         deleteTaskItemUseCase.deleteTaskItem(taskItem)
     }
 
     fun changeEnabledState (taskItem: TaskItem){
         val newItem = taskItem.copy(enabled = !taskItem.enabled)
         editTaskItemUseCase.editTaskItem(newItem)
     }
-
-
-
-
 
 }
