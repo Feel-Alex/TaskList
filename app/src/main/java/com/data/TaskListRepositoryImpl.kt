@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.domain.TaskItem
 import com.domain.TaskListRepository
 import java.util.Comparator
+import kotlin.random.Random
 
 object TaskListRepositoryImpl : TaskListRepository {
 
@@ -16,8 +17,12 @@ object TaskListRepositoryImpl : TaskListRepository {
 
 
     init {
-        for (i in 0 until 10){
-            addTaskItem(TaskItem("name $i", i, true))
+        for (i in 0 until 100){
+            addTaskItem(TaskItem(
+                "name $i",
+                i,
+                Random.nextBoolean()
+            ))
         }
     }
 
