@@ -11,36 +11,39 @@ object TaskListRepositoryImpl : TaskListRepository {
 
 
     val liveDataTLR = MutableLiveData<List<TaskItem>>()
-    private val taskListRepositoryImpl = sortedSetOf(Comparator<TaskItem> { p0, p1 -> p0.id.compareTo(p1.id)})
+    private val taskListRepositoryImpl =
+        sortedSetOf(Comparator<TaskItem> { p0, p1 -> p0.id.compareTo(p1.id) })
 
     private var autoincrementId = 0
 
 
     init {
-        for (i in 0 until 100){
-            addTaskItem(TaskItem(
-                "name $i",
-                i,
-                Random.nextBoolean()
-            ))
+        for (i in 0 until 100) {
+            addTaskItem(
+                TaskItem(
+                    "name $i",
+                    i,
+                    Random.nextBoolean()
+                )
+            )
         }
     }
 
 
     override fun addTaskItem(taskItem: TaskItem) {
         if (taskItem.id == TaskItem.UNDEFINED_ID)
-        taskItem.id = autoincrementId ++
+            taskItem.id = autoincrementId++
         taskListRepositoryImpl.add(taskItem)
-        updateList ()
+        updateList()
     }
 
     override fun deleteTaskItem(taskItem: TaskItem) {
         taskListRepositoryImpl.remove(taskItem)
-        updateList ()
+        updateList()
     }
 
     override fun editTaskItem(taskItem: TaskItem) {
-        val oldElement  = getTaskItem(taskItem.id)
+        val oldElement = getTaskItem(taskItem.id)
         taskListRepositoryImpl.remove(oldElement)
         addTaskItem(taskItem)
 
@@ -49,14 +52,14 @@ object TaskListRepositoryImpl : TaskListRepository {
     override fun getTaskItem(taskItemId: Int): TaskItem {
         return taskListRepositoryImpl.find {
             it.id == taskItemId
-        } ?: throw RuntimeException ("Element with id $taskItemId not found")
+        } ?: throw RuntimeException("Element with id $taskItemId not found")
     }
 
-    override fun getItemList() : LiveData<List<TaskItem>> {
+    override fun getItemList(): LiveData<List<TaskItem>> {
         return liveDataTLR
     }
 
-    fun updateList (){
+    fun updateList() {
         liveDataTLR.value = taskListRepositoryImpl.toList()
     }
 
