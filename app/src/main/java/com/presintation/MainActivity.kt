@@ -26,43 +26,45 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.taskList.observe(this) {
-        adapter.taskList = it
-        }
+            adapter.submitList(it) }
         loadRecycler()
     }
 
-
-    fun loadRecycler (){
+    fun loadRecycler() {
         adapter = TaskListAdapter()
         binding.rvTaskList.adapter = adapter
-        adapter.longClickListener = {
-            viewModel.changeEnabledState(it)
-        }
-        adapter.clickListener = {
-            Toast.makeText(this, "Botton ${it.name} is push", Toast.LENGTH_SHORT).show()
-        }
-
-        val callback = object : ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
+        val callback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-            return true
+                return false
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val taskItem = adapter.taskList[viewHolder.adapterPosition]
-                viewModel.deleteTaskItem(taskItem)
-
+                val swipeList = adapter.currentList[viewHolder.adapterPosition]
+                viewModel.deleteTaskItem(swipeList)
             }
         }
+
         val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(binding.rvTaskList)
+        itemTouchHelper.attachToRecyclerView(findViewById(R.id.rv_task_list))
 
+        adapter.longClick = {
+            viewModel.changeEnabledState(it)
+        }
 
+        adapter.click = {
+            Toast.makeText(this, "The bottom ${it.name} is pushed", Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.toast = {
+            Toast.makeText(this, "The bottom ${it.name} is deleted ", Toast.LENGTH_SHORT).show()
+        }
 
     }
+
+
 }

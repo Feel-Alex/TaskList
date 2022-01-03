@@ -14,8 +14,10 @@ class MainViewModel : ViewModel() {
     private val editTaskItemUseCase = EditTaskItemUseCase(repository)
 
     val taskList = getTaskItemListUseCase.getItemList()
+    var toast : ((TaskItem) -> Unit)? = null
 
     fun deleteTaskItem (taskItem: TaskItem){
+        toast?.invoke(taskItem)
          deleteTaskItemUseCase.deleteTaskItem(taskItem)
     }
 
