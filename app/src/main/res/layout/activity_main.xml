@@ -24,14 +24,14 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="132dp"
         android:clickable="true"
         android:contentDescription="@string/add_new_task_item"
         android:focusable="true"
+        android:src="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_launcher_background" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <include
         android:id="@+id/layout_main"
